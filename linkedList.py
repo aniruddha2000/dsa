@@ -27,9 +27,8 @@ class LinkedList:
         p = self.head
         i = 1
         if pos == 1:
-            temp.next = p
-            p = temp
-            # p = temp
+            temp.next = self.head
+            self.head = temp
         else:
             while (i < pos-1):
                 i += 1
@@ -49,5 +48,5 @@ if __name__ == '__main__':
     a = LinkedList(nodes)
     a.create_linked_list()
     a.printList()
-    a.insert_node(2)
+    a.insert_node(1)
     a.printList()
