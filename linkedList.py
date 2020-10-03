@@ -25,7 +25,8 @@ class LinkedList:
         value = input("Enter the node value:")
         temp = Node(value)
         p = self.head
-        for i in range(node-1):
+        i = 0
+        for i in range(node-2):
             p = p.next
         temp.next = p.next
         p.next = temp
@@ -42,5 +43,5 @@ if __name__=='__main__':
     a = LinkedList(nodes)
     a.create_linked_list()
     a.printList()
-    a.insert_node(3)
+    a.insert_node(1)
     a.printList()
