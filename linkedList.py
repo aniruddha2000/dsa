@@ -11,15 +11,15 @@ class LinkedList:
 
     def create_linked_list(self):
         for node in range(1, nodes+1):
-            temp = input("Enter the {} node:".format(node))
+            value = input("Enter the {} node:".format(node))
             if self.head == None:
-                self.head = Node(temp)
+                self.head = Node(value)
             else:
-                temp2 = Node(temp)
+                temp = Node(value)
                 p = self.head
                 while p.next != None:
                     p = p.next
-                p.next = temp2
+                p.next = temp
 
     def printList(self):
         temp = self.head
