@@ -21,15 +21,21 @@ class LinkedList:
                     p = p.next
                 p.next = temp
 
-    def insert_node(self, node):
+    def insert_node(self, pos):
         value = input("Enter the node value:")
         temp = Node(value)
         p = self.head
-        i = 0
-        for i in range(node-2):
-            p = p.next
-        temp.next = p.next
-        p.next = temp
+        i = 1
+        if pos == 1:
+            temp.next = p
+            p = temp
+            # p = temp
+        else:
+            while (i < pos-1):
+                i += 1
+                p = p.next
+            temp.next = p.next
+            p.next = temp
 
     def printList(self):
         temp = self.head
@@ -38,10 +44,10 @@ class LinkedList:
             temp = temp.next
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     nodes = int(input("Enter number of nodes: "))
     a = LinkedList(nodes)
     a.create_linked_list()
     a.printList()
-    a.insert_node(1)
+    a.insert_node(2)
     a.printList()
