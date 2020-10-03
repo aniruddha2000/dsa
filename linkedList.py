@@ -21,10 +21,19 @@ class LinkedList:
                     p = p.next
                 p.next = temp
 
+    def insert_node(self, node):
+        value = input("Enter the node value:")
+        temp = Node(value)
+        p = self.head
+        for i in range(node-1):
+            p = p.next
+        temp.next = p.next
+        p.next = temp
+
     def printList(self):
         temp = self.head
         while (temp):
-            print (temp.data)
+            print(temp.data)
             temp = temp.next
 
 
@@ -32,4 +41,6 @@ if __name__=='__main__':
     nodes = int(input("Enter number of nodes: "))
     a = LinkedList(nodes)
     a.create_linked_list()
+    a.printList()
+    a.insert_node(3)
     a.printList()
