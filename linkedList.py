@@ -30,19 +30,31 @@ class LinkedList:
         if pos == 1:
             temp.next = self.head
             self.head = temp
-        elif pos < nodes+2:
+        else:
             while (i < pos-1):
                 i += 1
                 p = p.next
             temp.next = p.next
             p.next = temp
+
+    def delete_node(self, pos):
+        p = self.head
+        i = 1
+        if pos == 1:
+            self.head = self.head.next
+            p = None
         else:
-            print("Check your linked list")
+            while (i < pos-1):
+                i += 1
+                p = p.next
+            temp = p.next
+            p.next = p.next.next
+            temp = None
 
     def printList(self):
         temp = self.head
         while (temp):
-            print(temp.data)
+            print(temp.data, end="=>")
             temp = temp.next
 
 
@@ -50,6 +62,7 @@ if __name__ == '__main__':
     nodes = int(input("Enter number of nodes: "))
     a = LinkedList(nodes)
     a.create_linked_list()
-    a.printList()
-    a.insert_node(7)
+    # a.printList()
+    # a.insert_node(7)
+    a.delete_node(3)
     a.printList()
