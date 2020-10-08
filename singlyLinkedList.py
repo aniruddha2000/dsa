@@ -56,6 +56,7 @@ class LinkedList:
         while (temp):
             print(temp.data, end="=>")
             temp = temp.next
+        print("NULL")
 
 
 if __name__ == '__main__':
