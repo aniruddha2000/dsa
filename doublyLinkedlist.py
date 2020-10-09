@@ -42,6 +42,22 @@ class LinkedList:
             p.next.prev = temp
             p.next = temp
 
+    def delete_node(self, pos):
+        p = self.head
+        i = 1
+        if pos == 1:
+            self.head = self.head.next
+            self.head.prev = None
+            p = None
+        else:
+            while (i < pos-1):
+                i += 1
+                p = p.next
+            temp = p.next
+            p.next = temp.next
+            temp.next.prev = p
+            temp = None
+
     def printList(self):
         temp = self.head
         while (temp):
@@ -55,5 +71,6 @@ if __name__ == '__main__':
     a = LinkedList(nodes)
     a.create_linked_list()
     a.printList()
-    a.insert_node(4)
+    # a.insert_node(4)
+    a.delete_node(3)
     a.printList()
