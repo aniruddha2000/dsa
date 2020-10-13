@@ -11,6 +11,8 @@ def preorder_trav(root):
     while stack:
         curr = stack.pop()
         print(curr.val, end=" ")
+        # right first because lft will pop first
+        # for the stack
         if curr.right:
             stack.append(curr.right)
         if curr.left:
