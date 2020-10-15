@@ -5,6 +5,7 @@ class Node:
         self.val = data
 
 
+# DLR
 def preorder_trav(root):
     stack = []
     stack.append(root)
@@ -19,6 +20,7 @@ def preorder_trav(root):
             stack.append(curr.left)
 
 
+# LDR
 def inorder_trav(root):
     stack = []
     while True:
@@ -36,6 +38,7 @@ def peek(stack):
         return stack[-1]
     return None
 
+# LRD
 def postorder_trav(root):
     stack = []
     while True:
