@@ -19,6 +19,7 @@ def del_node(root):
             queue.put(temp_node.right)
         temp_node = None
     root = None
+    return root
 
 root = Node(1)
 root.left = Node(2)
@@ -28,4 +29,3 @@ root.left.right = Node(5)
 root.right.left = Node(6)
 root.right.right = Node(7)
 del_node(root)
-print()
