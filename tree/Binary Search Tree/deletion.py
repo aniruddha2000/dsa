@@ -11,30 +11,45 @@ def inorder_trav(root):
         print(root.val, end=" ")
         inorder_trav(root.right)
 
+def find_inorder_succ(root):
+    while root.left is not None:
+        root = root.left
+    return root
+
 def delete_node(root, data):
     if root == None:
         return "Empty tree"
-    while root:
-        if root.val == data:
-            if root.left == None and root.left == None:
-                root = None
-                return "Deleted"
-            elif root.left == None or root.right == None:
-                if root.left != None:
-                    child = root.left
-                    root = child
-                    child = None
-                else:
-                    child = root.right
-                    root = child
-                    child = None
-                return root.val
-
-        elif data < root.val:
-            root = root.left
+    parent = None
+    curr = root
+    while curr and curr.val != data:
+        parent = curr
+        if data < curr.val:
+            curr = curr.left
         else:
-            root = root.right
-    return "Not found"
+            curr = curr.right
+    # case 1(node has no child):
+    if curr.left == None and curr.right == None:
+        if parent.left == curr:
+            parent.left = None
+        else:
+            parent.right = None
+
+    # case 2(node has one child):
+    elif curr.left != None or curr.right != None:
+        if curr.left:
+            child = curr.left
+        else:
+            child = curr.right
+
+        if curr == parent.left:
+            parent.left = child
+            curr = None
+            child = None
+        else:
+            parent.right = child
+            curr = None
+            child = None
+    return root
 
 
 root = Node(8)
@@ -45,4 +60,8 @@ root.left.right = Node(6)
 root.left.right.left = Node(5)
 root.right.left = Node(9)
 root.right.right = Node(14)
-print(delete_node(root, 6))
+root.right.right.right = Node(17)
+inorder_trav(root)
+print()
+root = delete_node(root, 6)
+inorder_trav(root)
