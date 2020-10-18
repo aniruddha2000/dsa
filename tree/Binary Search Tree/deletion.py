@@ -20,14 +20,12 @@ def inorder_trav(root):
         print(root.val, end=" ")
         inorder_trav(root.right)
 
-def find_inorder_succ(root):
-    while root.left:
-        root = root.left
-    return root
+def find_inorder_succ(curr):
+    while curr.left:
+        curr = curr.left
+    return curr
 
 def delete_node(root, data):
-    # if root == None:
-    #     return "Empty tree"
     parent = None
     curr = root
     while curr and curr.val != data:
@@ -52,8 +50,9 @@ def delete_node(root, data):
     # case 3(node has both child):
     elif curr.left and curr.right:
         inorder_succ = find_inorder_succ(curr.right)
-        curr.val = inorder_succ.val
+        val = inorder_succ.val
         delete_node(root, inorder_succ.val)
+        curr.val = val
 
     # case 2(node has one child):
     else:
