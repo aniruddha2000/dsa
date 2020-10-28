@@ -44,53 +44,63 @@ class AVL_Tree:
 
         return root
 
-    def delete_node(self, root, data):
-        parent = None
-        curr = root
-        while curr and curr.val != data:
-            parent = curr
-            if data < curr.val:
-                curr = curr.left
-            else:
-                curr = curr.right
-        if curr is None:
+    def deletion(self, root, data):
+        # Step 1 - Perform standard BST delete
+        if not root:
             return root
 
-        # case 1(node has no child):
-        if curr.left == None and curr.right == None:
-            if curr != root:
-                if parent.left == curr:
-                    parent.left = None
-                else:
-                    parent.right = None
-            else:
-                root = None
+        elif key < root.val:
+            root.left = self.deletion(root.left, key)
 
-        # case 3(node has both child):
-        elif curr.left and curr.right:
-            inorder_succ = self.getInorderSucc(curr.right)
-            val = inorder_succ.val
-            delete_node(root, inorder_succ.val)
-            curr.val = val
+        elif key > root.val:
+            root.right = self.deletion(root.right, key)
 
-        # case 2(node has one child):
         else:
-            if curr.left:
-                child = curr.left
-            else:
-                child = curr.right
+            if root.left is None:
+                temp = root.right
+                root = None
+                return temp
 
-            if curr != root:
-                if curr == parent.left:
-                    parent.left = child
-                    curr = None
-                    child = None
-                else:
-                    parent.right = child
-                    curr = None
-                    child = None
-            else:
-                root = child
+            elif root.right is None:
+                temp = root.left
+                root = None
+                return temp
+
+            temp = self.getMinValueNode(root.right)
+            root.val = temp.val
+            root.right = self.delete(root.right,
+                                      temp.val)
+
+        if root is None:
+            return root
+
+        # AVL balancing
+        # Update the height after deletion
+        root.height = 1 + max(self.getHeight(root.left),
+                              self.getHeight(root.right))
+
+        # Get the balance factor
+        balance = self.getBalance(root)
+
+        # Check if tree is unbalanced
+        # Case 1 - Left Left
+        if balance > 1 and self.getBalance(root.left) >= 0:
+            return self.rightRotate(root)
+
+        # Case 2 - Right Right
+        if balance < -1 and self.getBalance(root.right) <= 0:
+            return self.leftRotate(root)
+
+        # Case 3 - Left Right
+        if balance > 1 and self.getBalance(root.left) < 0:
+            root.left = self.leftRotate(root.left)
+            return self.rightRotate(root)
+
+        # Case 4 - Right Left
+        if balance < -1 and self.getBalance(root.left) > 0:
+            root.right = self.rightRotate(root.right)
+            return self.leftRotate(root)
+
         return root
 
     def leftRotate(self, z):
@@ -148,10 +158,14 @@ def preorder_trav(root):
 
 my_tree = AVL_Tree()
 root = None
-keys = [10, 20, 30, 40, 50, 25]
+keys = [9, 5, 10, 0, 6, 11, -1, 1, 2]
 
 for key in keys:
     root = my_tree.insert(root, key)
 
+preorder_trav(root)
+print()
+
+my_tree.deletion(root, 10)
 preorder_trav(root)
 print()
