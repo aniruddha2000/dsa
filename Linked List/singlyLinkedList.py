@@ -51,6 +51,17 @@ class LinkedList:
             p.next = p.next.next
             temp = None
 
+    def reverse_list(self):
+        prev = None
+        curr = self.head
+        while curr != None:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        self.head = prev
+
+
     def printList(self):
         temp = self.head
         while (temp):
@@ -63,7 +74,8 @@ if __name__ == '__main__':
     nodes = int(input("Enter number of nodes: "))
     a = LinkedList(nodes)
     a.create_linked_list()
-    # a.printList()
+    a.printList()
     # a.insert_node(7)
-    a.delete_node(3)
+    # a.delete_node(3)
+    a.reverse_list()
     a.printList()
