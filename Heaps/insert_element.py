@@ -2,8 +2,8 @@ from Build_array import printHeap
 
 
 def heapify(arr, n, i):
-    parent = (i-1)//2
-    if arr[parent] > 0:
+    if i != 0:
+        parent = (i-1)//2
         if arr[i] > arr[parent]:
             arr[i], arr[parent] = arr[parent], arr[i]
             heapify(arr, n, parent)
