@@ -10,7 +10,7 @@ class LinkedList:
         self.nodes = nodes
 
     def create_linked_list(self):
-        for node in range(1, nodes+1):
+        for node in range(1, self.nodes+1):
             # value = input("Enter the {} node:".format(node))
             value = node
             if self.head == None:
@@ -21,6 +21,7 @@ class LinkedList:
                 while p.next != None:
                     p = p.next
                 p.next = temp
+        return self.head
 
     def insert_node(self, pos):
         value = input("Enter the node value:")
