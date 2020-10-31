@@ -58,6 +58,14 @@ class LinkedList:
             temp.next.prev = p
             temp = None
 
+    def reverse(self):
+        curr = self.head
+        while curr != None:
+            temp = curr.prev
+            curr.prev, curr.next = curr.next, curr.prev
+            curr = curr.prev
+        self.head = temp.prev
+
     def printList(self):
         temp = self.head
         while (temp):
@@ -72,5 +80,6 @@ if __name__ == '__main__':
     a.create_linked_list()
     a.printList()
     # a.insert_node(4)
-    a.delete_node(3)
+    # a.delete_node(3)
+    a.reverse()
     a.printList()
