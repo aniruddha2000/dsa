@@ -6,13 +6,9 @@ def heapify(arr, n, i):
     right = 2 * i + 2
 
     if left < n and arr[left] > arr[largest]:
-        a = arr[left]
-        la = arr[largest]
         largest = left
 
     if right < n and arr[right] > arr[largest]:
-        b = arr[right]
-        la = arr[largest]
         largest = right
 
     if largest != i:
