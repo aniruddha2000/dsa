@@ -60,26 +60,30 @@ class LinkedList:
 
     def reverse(self):
         curr = self.head
-        while curr != None:
-            temp = curr.prev
-            curr.prev, curr.next = curr.next, curr.prev
-            curr = curr.prev
-        self.head = temp.prev
+        prev = None
+        while curr is not None:
+            nxt = curr.next
+            curr.prev = nxt
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        return prev
 
-    def printList(self):
-        temp = self.head
-        while (temp):
-            print(temp.data, end="<=>")
-            temp = temp.next
-        print("NULL")
+
+def printList(head):
+    temp = head
+    while (temp):
+        print(temp.data, end="<=>")
+        temp = temp.next
+    print("NULL")
 
 
 if __name__ == '__main__':
     nodes = int(input("Enter number of nodes: "))
     a = LinkedList(nodes)
     a.create_linked_list()
-    a.printList()
+    # a.printList()
     # a.insert_node(4)
     # a.delete_node(3)
-    a.reverse()
-    a.printList()
+    head = a.reverse()
+    printList(head)
