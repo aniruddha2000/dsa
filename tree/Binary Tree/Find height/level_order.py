@@ -10,7 +10,7 @@ class Node:
 
 def find_height(root):
     if root is None:
-        return 0
+        return -1
     queue = Queue()
     queue.put(root)
     height = 0
