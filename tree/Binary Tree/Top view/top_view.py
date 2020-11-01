@@ -6,7 +6,6 @@ class newNode:
         self.data = data
         self.left = None
         self.right = None
-        self.hd = 2**32
 
 
 def printTopViewUtil(root, height, level, m):
