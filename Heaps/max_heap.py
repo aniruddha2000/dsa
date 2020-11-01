@@ -15,22 +15,23 @@ def heapify(arr, n, i):
         arr[i], arr[largest] = arr[largest], arr[i]
         heapify(arr, n, largest)
 
-def build_heap(arr, n):
+def build_heap(arr):
+    n = len(arr)
     startIndx = n // 2 - 1
     for i in range(startIndx, -1, -1):
         heapify(arr, n, i)
 
-def printHeap(arr, n):
+def printHeap(arr):
+    n = len(arr)
     print("Array representation of Heap is:");
 
     for i in range(n):
-        print(arr[i], end = " ");
+        print(arr[i], end = " ")
     print()
 
 
 if __name__ == "__main__":
     arr = [ 1, 3, 5, 4, 6, 13,
             10, 9, 8, 15, 17 ]
-    n = len(arr)
-    build_heap(arr, n)
-    printHeap(arr, n)
+    build_heap(arr)
+    printHeap(arr)
