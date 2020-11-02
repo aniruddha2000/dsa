@@ -1,4 +1,5 @@
-from queue import Queue
+import heapq
+
 
 class HuffmanNone:
     def __init__(self, data, freq):
@@ -6,6 +7,16 @@ class HuffmanNone:
         self.freq = freq
         self.left = None
         self.right = None
+
+    def __lt__(self, other):
+        return self.freq < other.freq
+
+    def __eq__(self, other):
+        if(other == None):
+            return False
+        if(not isinstance(other, HuffmanNone)):
+            return False
+        return self.freq == other.freq
 
 
 def printCode(root, s):
@@ -17,21 +28,23 @@ def printCode(root, s):
 
 def makeHuffmanNone(arr, freq, size):
     # freq = sorted(freq, reverse=True)
-    q = Queue()
+    q = []
     for i in range(0, size):
         h_node = HuffmanNone(arr[i], freq[i])
-        q.put(h_node)
+        heapq.heappush(q, h_node)
 
     root = None
-    while q.qsize() > 1:
-        frst_min = q.get()
-        scnd_min = q.get()
+    while len(q) > 1:
+        frst_min = heapq.heappop(q)
+        # q.pop(0)
+        scnd_min = heapq.heappop(q)
+        # q.pop(0)
 
         non_leaf = HuffmanNone(None, (frst_min.freq+scnd_min.freq))
         non_leaf.left = frst_min
         non_leaf.right = scnd_min
         root = non_leaf
-        q.put(non_leaf)
+        heapq.heappush(q, non_leaf)
     printCode(root, "")
 
 
