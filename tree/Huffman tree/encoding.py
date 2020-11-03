@@ -26,19 +26,17 @@ def printCode(root, s):
     printCode(root.left, s+"0")
     printCode(root.right, s+"1")
 
-def makeHuffmanNone(arr, freq, size):
-    # freq = sorted(freq, reverse=True)
+def makeHuffmanNone(data, size):
     q = []
     for i in range(0, size):
-        h_node = HuffmanNone(arr[i], freq[i])
+        (char, freq) = data[i]
+        h_node = HuffmanNone(char, freq)
         heapq.heappush(q, h_node)
 
     root = None
     while len(q) > 1:
         frst_min = heapq.heappop(q)
-        # q.pop(0)
         scnd_min = heapq.heappop(q)
-        # q.pop(0)
 
         non_leaf = HuffmanNone(None, (frst_min.freq+scnd_min.freq))
         non_leaf.left = frst_min
@@ -50,7 +48,15 @@ def makeHuffmanNone(arr, freq, size):
 
 
 if __name__ == "__main__":
-    arr = ['a', 'b', 'c', 'd', 'e', 'f']
-    freq = [5, 9, 12, 13, 16, 45]
-    size = len(arr)
-    makeHuffmanNone(arr, freq, size)
+    string = "BCAADDDCCACACAC"
+    data = {}
+    for c in string:
+        if c in data:
+            data[c] += 1
+        else:
+            data[c] = 1
+
+    data = sorted(data.items(), key=lambda x: x[1])
+    print(data)
+    size = len(data)
+    makeHuffmanNone(data, size)
