@@ -69,7 +69,7 @@ class AVL_Tree:
             temp = self.getMinValueNode(root.right)
             root.val = temp.val
             root.right = self.deletion(root.right,
-                                     temp.val)
+                                      temp.val)
 
         if root is None:
             return root
@@ -167,6 +167,6 @@ for key in keys:
 preorder_trav(root)
 print()
 
-my_tree.deletion(root, 10)
+root = my_tree.deletion(root, 10)
 preorder_trav(root)
 print()
