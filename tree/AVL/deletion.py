@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, data):
-        self.val = data
+    def __init__(self, val):
+        self.val = val
         self.left = None
         self.right = None
         self.height = 1
@@ -11,7 +11,7 @@ class AVL_Tree:
         # Simple insertion
         if root is None:
             return Node(key)
-        if key < root.val:
+        elif key < root.val:
             root.left = self.insert(root.left, key)
         else:
             root.right = self.insert(root.right, key)
@@ -44,7 +44,7 @@ class AVL_Tree:
 
         return root
 
-    def deletion(self, root, data):
+    def deletion(self, root, key):
         # Step 1 - Perform standard BST delete
         if not root:
             return root
@@ -68,8 +68,8 @@ class AVL_Tree:
 
             temp = self.getMinValueNode(root.right)
             root.val = temp.val
-            root.right = self.delete(root.right,
-                                      temp.val)
+            root.right = self.deletion(root.right,
+                                     temp.val)
 
         if root is None:
             return root
@@ -142,11 +142,6 @@ class AVL_Tree:
             return 0
 
         return self.getHeight(root.left) - self.getHeight(root.right)
-
-    def getInorderSucc(self, curr):
-        while curr.left:
-            curr = curr.left
-        return curr
 
     def getMinValueNode(self, root):
         if root is None or root.left is None:
