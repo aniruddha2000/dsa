@@ -97,7 +97,7 @@ class AVL_Tree:
             return self.rightRotate(root)
 
         # Case 4 - Right Left
-        if balance < -1 and self.getBalance(root.left) > 0:
+        if balance < -1 and self.getBalance(root.right) > 0:
             root.right = self.rightRotate(root.right)
             return self.leftRotate(root)
 
@@ -147,6 +147,12 @@ class AVL_Tree:
         while curr.left:
             curr = curr.left
         return curr
+
+    def getMinValueNode(self, root):
+        if root is None or root.left is None:
+            return root
+
+        return self.getMinValueNode(root.left)
 
 
 def preorder_trav(root):
