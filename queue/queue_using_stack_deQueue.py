@@ -9,20 +9,20 @@ class Queue:
     def deQueue(self):
         if len(self.s1) == 0 and len(self.s2) == 0:
             print("Empty Queue")
-        else:
+            return
+        elif len(self.s2) == 0 and len(self.s1) > 0:
             while len(self.s1) != 0:
-                self.s2.append(self.s1[-1])
-                self.s1.pop()
-            print("Removed : " + str(self.s2[-1]))
-            self.s2.pop()
-
+                temp = self.s1.pop()
+                self.s2.append(temp)
+            return self.s2.pop()
+        else:
+            return self.s2.pop()
 
 if __name__ == "__main__":
-    queue = Queue()
-    queue.enQueue(5)
-    queue.enQueue(10)
-    queue.enQueue(6)
-    queue.deQueue()
-    queue.deQueue()
-    queue.deQueue()
-    queue.deQueue()
+    q = Queue()
+    q.enQueue(5)
+    print(q.deQueue())
+    q.enQueue(10)
+    q.enQueue(15)
+    print(q.deQueue())
+    print(q.deQueue())
