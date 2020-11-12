@@ -18,17 +18,23 @@ class Graph:
         pq = []
         dist = [-1] * (self.v)
         dist[src] = 0
-        heapq.heappush(pq, src)
+        heapq.heappush(pq, (0, src))
         while pq:
-            v = heapq.heappop(pq)
-            for w in self.graph[v]:
-                d = dist[v] + w[1]
-                if dist[w[0]] == -1:
-                    dist[w[0]] = d
-                    heapq.heappush(pq, w[0])
+            current_distance, current_vertex = heapq.heappop(pq)
 
-                if dist[w[0]] > d:
-                    dist[0] = d
+            if current_distance > dist[current_vertex]:
+                continue
+
+            for neighbor, weight in self.graph[current_vertex]:
+                distance = current_distance + weight
+
+                if dist[neighbor] == -1:
+                    dist[neighbor] = distance
+                    heapq.heappush(pq, (distance, neighbor))
+
+                if distance < dist[neighbor]:
+                    dist[neighbor] = distance
+                    heapq.heappush(pq, (distance, neighbor))
 
         self.printDist(dist)
 
