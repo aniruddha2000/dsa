@@ -1,9 +1,7 @@
 def count_sort(arr):
     max_ele = int(max(arr))
-    min_ele = int(min(arr))
 
     count = [0 for i in range(max_ele+1)]
-    output = [0 for i in range(len(arr))]
 
     for i in arr:
         count[i] += 1
