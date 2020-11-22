@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class Graph:
     def __init__(self, vertices):
         self.v = vertices
@@ -38,7 +39,7 @@ class Graph:
             parent.append(node)
             rank.append(0)
 
-        while e < self.v -1:
+        while e < self.v - 1:
             u, v, w = self.graph[i]
             i += 1
             x = self.find(parent, u)
@@ -57,7 +58,7 @@ class Graph:
         for u, v, w in result:
             minCost += w
             print("{} -- {} == {}".format(u, v, w))
-        print("Minimum Spanning Tree" , minCost)
+        print("Minimum Spanning Tree", minCost)
 
 
 g = Graph(4)
